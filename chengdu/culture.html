@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>蜀韵·成都 - 文化</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-area">
+            <img src="https://img.icons8.com/color/48/000000/panda.png" alt="Logo">
+            <h1>蜀韵·成都</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="food.html">美食</a></li>
+                <li><a href="sights.html">景点</a></li>
+                <li><a href="culture.html" class="active">文化</a></li>
+                <li><a href="travel.html">攻略</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-content">
+        <h2 style="text-align: center; color: #d4a373; font-size: 32px; margin-top: 50px;">天府文化</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 40px; font-size: 16px;">川剧变脸、蜀锦蜀绣、茶馆文化、三国文化...</p>
+        
+        <!-- 文化展示区（横向滚轮） -->
+        <div class="food-gallery">
+            
+            <!-- 第一张卡片 -->
+            <div class="food-card">
+                <img src="9.jpg" alt="川剧变脸">
+                <h3>川剧变脸</h3>
+                <p>川剧是传统戏曲剧种之一，而“变脸”是其绝活。演员在瞬间变换面部脸谱，神秘莫测，令人叹为观止，是巴蜀文化的瑰宝。</p>
+            </div>
+            
+            <!-- 第二张卡片 -->
+            <div class="food-card">
+                <img src="10.png" alt="蜀锦蜀绣">
+                <h3>蜀锦蜀绣</h3>
+                <p>蜀锦是中国四大名锦之一，蜀绣则是四大名绣之一。色彩鲜艳、针法严谨，一针一线间尽显天府之国的锦绣华美与工匠精神。</p>
+            </div>
+            
+            <!-- 第三张卡片 -->
+            <div class="food-card">
+                <img src="12.png" alt="茶馆文化">
+                <h3>茶馆文化</h3>
+                <p>“坐茶馆”是成都人的一种生活方式。竹靠椅、盖碗茶、采耳师傅，在人民公园的鹤鸣茶社，你可以体会到最地道的成都慢生活。</p>
+            </div>
+            
+            <!-- 第四张卡片 -->
+            <div class="food-card">
+                <img src="11.png" alt="三国文化">
+                <h3>三国文化</h3>
+                <p>成都是蜀汉政权的都城，武侯祠承载着深厚的三国历史底蕴。诸葛亮的智慧与刘备的仁义，在这里留下了不可磨灭的历史印记。</p>
+            </div>
+            
+        </div>
+
+        <style>
+            .page-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .food-gallery {
+                display: flex;
+                gap: 20px;
+                overflow-x: auto;
+                padding: 10px 4px 20px;    
+                scroll-behavior: smooth;
+                scrollbar-width: thin;     
+            }
+            .food-card {
+                flex: 0 0 280px;           
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+                overflow: hidden;
+                transition: transform .2s;
+                text-align: left;
+            }
+            .food-card:hover {
+                transform: translateY(-5px);
+            }
+            .food-card img {
+                width: 100%;
+                aspect-ratio: 4 / 3;       
+                object-fit: cover;         
+                display: block;
+            }
+            .food-card h3 {
+                margin: 12px 16px 6px;
+                font-size: 18px;
+                color: #333;
+            }
+            .food-card p {
+                margin: 0 16px 16px;
+                font-size: 14px;
+                color: #777;
+                line-height: 1.6;
+            }
+        </style>
+
+        <script>
+            const gallery = document.querySelector('.food-gallery');
+            if (gallery) {
+                gallery.addEventListener('wheel', (e) => {
+                    if (gallery.scrollWidth > gallery.clientWidth) {
+                        e.preventDefault();
+                        gallery.scrollLeft += e.deltaY;
+                    }
+                }, { passive: false });
+            }
+        </script>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 蜀韵·成都 文化旅游网. 保留所有权利.</p>
+    </footer>
+</body>
+</html>

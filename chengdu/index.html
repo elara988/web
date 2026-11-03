@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>蜀韵·成都 - 首页</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-area">
+            <!-- 这里可以使用一个真实的Logo图片，此处用文字占位 -->
+            <img src="https://img.icons8.com/color/48/000000/panda.png" alt="Logo">
+            <h1>蜀韵·成都</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">首页</a></li>
+                <li><a href="food.html">美食</a></li>
+                <li><a href="sights.html">景点</a></li>
+                <li><a href="culture.html">文化</a></li>
+                <li><a href="travel.html">攻略</a></li>
+            </ul>
+        </nav>
+    </header>
+
+        <!-- 全屏Banner/轮播图区域 -->
+    <section class="banner">
+        <div class="carousel">
+            <div class="slides">
+                <img src="1_2.jpg" alt="成都风景1">
+                <img src="2.jpg" alt="成都风景2">
+                <img src="3.jpg" alt="成都风景3">
+                <img src="4.jpg" alt="成都风景4">
+            </div>
+
+            <!-- 左右切换按钮 -->
+            <button class="prev" aria-label="上一张">&#10094;</button>
+            <button class="next" aria-label="下一张">&#10095;</button>
+
+            <!-- 底部小圆点 -->
+            <div class="dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+                <span class="dot" data-index="3"></span>
+            </div>
+
+            <!-- 固定文字层 -->
+            <div class="banner-text">
+                <h2>天府之国，魅力成都</h2>
+                <p>探索千年锦官城，品味慢生活</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频介绍区域 -->
+    <section class="video-section">
+        <div class="video-container">
+            <!-- 使用一个免费的开源视频作为占位 -->
+            <video controls poster="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                您的浏览器不支持视频播放。
+            </video>
+        </div>
+    </section>
+
+    <!-- 文字简介区域 -->
+    <section class="intro-section">
+        <p>成都，一座来了就不想走的城市。这里有着深厚的历史文化底蕴，从武侯祠的三国遗风到杜甫草堂的诗意栖居；这里也是美食的天堂，麻辣火锅与悠闲茶馆相得益彰。在这座快节奏与慢生活完美融合的都市里，您可以漫步于宽窄巷子的青石板路，也可以在人民公园的竹椅上品一盏盖碗茶。蜀韵成都，带您领略最地道的天府风情。</p>
+    </section>
+
+    <footer>
+        <p> 2024 蜀韵·成都 文化旅游网. 保留所有权利.</p>
+    </footer>
+        <script>
+        const slides = document.querySelector('.slides');
+        const imgs = document.querySelectorAll('.slides img');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.querySelector('.carousel .prev');
+        const nextBtn = document.querySelector('.carousel .next');
+        let index = 0;
+        let timer = null;
+        const total = imgs.length;
+
+        function goTo(i) {
+            index = (i + total) % total;
+            slides.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach((d, k) => d.classList.toggle('active', k === index));
+        }
+        function next() { goTo(index + 1); }
+        function prev() { goTo(index - 1); }
+        function startAuto() { stopAuto(); timer = setInterval(next, 4000); }
+        function stopAuto() { if (timer) clearInterval(timer); }
+
+        nextBtn.addEventListener('click', () => { next(); startAuto(); });
+        prevBtn.addEventListener('click', () => { prev(); startAuto(); });
+        
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                goTo(Number(dot.dataset.index));
+                startAuto();
+            });
+        });
+
+        const carousel = document.querySelector('.carousel');
+        carousel.addEventListener('mouseenter', stopAuto);
+        carousel.addEventListener('mouseleave', startAuto);
+
+        let startX = 0;
+        carousel.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX; stopAuto();
+        }, { passive: true });
+        carousel.addEventListener('touchend', e => {
+            const diff = e.changedTouches[0].clientX - startX;
+            if (diff > 50) prev();
+            else if (diff < -50) next();
+            startAuto();
+        }, { passive: true });
+
+        startAuto();
+    </script>
+</body>
+</html>

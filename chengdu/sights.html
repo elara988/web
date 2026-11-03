@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>蜀韵·成都 - 景点</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-area">
+            <img src="https://img.icons8.com/color/48/000000/panda.png" alt="Logo">
+            <h1>蜀韵·成都</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="food.html">美食</a></li>
+                <li><a href="sights.html" class="active">景点</a></li>
+                <li><a href="culture.html">文化</a></li>
+                <li><a href="travel.html">攻略</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-content">
+        <!-- 标题部分，颜色改成了截图里的金黄色 -->
+        <h2 style="text-align: center; color: #d4a373; font-size: 32px; margin-top: 50px;">必游景点</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 40px; font-size: 16px;">探索天府之国，感受千年蓉城的独特魅力。</p>
+        
+        <!-- 景点展示区（横向滚轮） -->
+        <div class="food-gallery">
+            
+            <!-- ===== 第一张卡片：宽窄巷子 ===== -->
+            <div class="food-card">
+                <!-- 👇 找好图片后，把 1_2.jpg 替换成你的景点图片名 -->
+                <img src="5.jpg" alt="宽窄巷子">
+                <h3>宽窄巷子</h3>
+                <p>由宽巷子、窄巷子和井巷子组成，是成都遗留下来的清朝古街道。在这里可以体验老成都的慢生活，品尝地道小吃。</p>
+            </div>
+            
+            <!-- ===== 第二张卡片：大熊猫基地 ===== -->
+            <div class="food-card">
+                <!-- 👇 找好图片后，把 3.jpg 替换成你的景点图片名 -->
+                <img src="8.jpg" alt="大熊猫繁育研究基地">
+                <h3>大熊猫基地</h3>
+                <p>来成都必打卡的“顶流”地！这里不仅是研究大熊猫的科研机构，更是一个生态公园，可以近距离观赏憨态可掬的国宝。</p>
+            </div>
+            
+            <!-- ===== 第三张卡片：武侯祠 ===== -->
+            <div class="food-card">
+                <!-- 👇 找好图片后，把 2.jpg 替换成你的景点图片名 -->
+                <img src="6.jpg" alt="武侯祠">
+                <h3>武侯祠</h3>
+                <p>中国唯一的一座君臣合祀祠庙，也是全国影响最大的三国遗迹博物馆。红墙竹影，是拍照打卡的绝佳胜地，感受三国文化。</p>
+            </div>
+            
+            <!-- ===== 第四张卡片：都江堰 ===== -->
+            <div class="food-card">
+                <!-- 👇 找好图片后，把 4.jpg 替换成你的景点图片名 -->
+                <img src="7.jpg" alt="都江堰">
+                <h3>都江堰</h3>
+                <p>两千多年前由李冰父子主持修建的大型水利工程，至今仍在发挥作用。不仅景色秀丽，更是古人智慧的结晶，世界文化遗产。</p>
+            </div>
+            
+            <!-- 如果需要更多景点，直接复制上面的 <div class="food-card">...</div> 整块往下粘贴即可 -->
+            
+        </div>
+
+        <!-- 页面专属样式 -->
+        <style>
+            .page-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            /* 横向滚动容器 */
+            .food-gallery {
+                display: flex;
+                gap: 20px;
+                overflow-x: auto;          /* 开启横向滚动 */
+                padding: 10px 4px 20px;    /* 留出空间，防止阴影被遮挡 */
+                scroll-behavior: smooth;
+                scrollbar-width: thin;     /* 细滚动条 */
+            }
+
+            /* 每张卡片固定宽度 */
+            .food-card {
+                flex: 0 0 280px;           /* 景点卡片宽度 280px */
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+                overflow: hidden;
+                transition: transform .2s;
+                text-align: left;
+            }
+            .food-card:hover {
+                transform: translateY(-5px);
+            }
+
+            /* 图片统一比例，不会太大 */
+            .food-card img {
+                width: 100%;
+                aspect-ratio: 4 / 3;       /* 固定 4:3 比例 */
+                object-fit: cover;         /* 裁剪填充，不变形 */
+                display: block;
+            }
+
+            .food-card h3 {
+                margin: 12px 16px 6px;
+                font-size: 18px;
+                color: #333;
+            }
+            .food-card p {
+                margin: 0 16px 16px;
+                font-size: 14px;
+                color: #777;
+                line-height: 1.6;
+            }
+        </style>
+
+        <!-- 滚轮控制脚本 -->
+        <script>
+            const gallery = document.querySelector('.food-gallery');
+            if (gallery) {
+                gallery.addEventListener('wheel', (e) => {
+                    if (gallery.scrollWidth > gallery.clientWidth) {
+                        e.preventDefault();
+                        gallery.scrollLeft += e.deltaY;
+                    }
+                }, { passive: false });
+            }
+        </script>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 蜀韵·成都 文化旅游网. 保留所有权利.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,314 @@
+/* =========================================
+   1. 全局重置与基础样式
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 主题颜色变量定义：金色 */
+:root {
+    --gold: #d4af37;
+    --dark-gold: #b8962e;
+    --dark-bg: #222;
+    --light-bg: #fff;
+}
+
+/* =========================================
+   2. 页头与导航栏样式
+   ========================================= */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    height: 80px;
+    background-color: var(--light-bg);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-area img {
+    height: 40px;
+}
+
+.logo-area h1 {
+    font-size: 24px;
+    color: var(--gold);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav ul li a {
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+/* 导航悬停与当前高亮显示 */
+nav ul li a:hover, 
+nav ul li a.active {
+    color: var(--gold);
+    font-weight: bold;
+}
+
+/* =========================================
+   3. 首页轮播图 (Banner) 样式 (纯CSS实现)
+   ========================================= */
+.slider-container {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* 3张图，总宽度300%，动画循环 */
+    animation: slideBanner 15s infinite ease-in-out; 
+}
+
+.slide {
+    width: 100vw;
+    height: 100%;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+}
+
+.slide h2 {
+    font-size: 48px;
+    color: var(--gold);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+/* 轮播图关键帧动画 */
+@keyframes slideBanner {
+    0%, 25% { transform: translateX(0); }        /* 第1张停留 */
+    33%, 58% { transform: translateX(-100vw); }  /* 第2张停留 */
+    66%, 91% { transform: translateX(-200vw); }  /* 第3张停留 */
+    100% { transform: translateX(-300vw); }      /* 回到起点准备循环 */
+}
+
+/* =========================================
+   4. 视频与简介区域样式
+   ========================================= */
+.video-section {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: var(--light-bg);
+}
+
+.video-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 2px solid var(--gold);
+}
+
+.video-container video {
+    width: 100%;
+    display: block;
+}
+
+.intro-section {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+}
+
+/* =========================================
+   5. 内页通用内容区样式 (美食、景点等页面)
+   ========================================= */
+.page-content {
+    padding: 60px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 60vh;
+}
+
+.page-content h2 {
+    color: var(--gold);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* =========================================
+   6. 攻略页：表格样式
+   ========================================= */
+.travel-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.travel-table th, .travel-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.travel-table th {
+    background-color: var(--gold);
+    color: #fff;
+    font-weight: bold;
+}
+
+.travel-table tr:hover {
+    background-color: #fcf9f2; /* 鼠标悬停变淡金色 */
+}
+
+/* =========================================
+   7. 页脚样式
+   ========================================= */
+footer {
+    background-color: var(--dark-bg);
+    color: #aaa;
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 50px;
+    font-size: 14px;
+}
+/* ========== 全屏轮播 Banner 样式 ========== */
+.banner {
+    position: relative;
+    width: 100%;
+    height: 70vh; 
+    min-height: 420px;
+    overflow: hidden;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slides {
+    display: flex; 
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease-in-out; 
+}
+
+.slides img {
+    flex: 0 0 100%; 
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+}
+
+.dots {
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 5;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dot.active {
+    width: 26px;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.carousel .prev, .carousel .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.25s;
+}
+
+.carousel .prev { left: 20px; }
+.carousel .next { right: 20px; }
+
+.carousel .prev:hover, .carousel .next:hover { 
+    background: rgba(139, 30, 30, 0.85); 
+}
+
+.banner-text {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.45));
+    pointer-events: none;
+}
+
+.banner-text h2 {
+    font-size: clamp(28px, 5vw, 52px);
+    letter-spacing: 4px;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+    margin-bottom: 12px;
+}
+
+.banner-text p {
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}

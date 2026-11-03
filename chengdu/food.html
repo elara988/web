@@ -1,0 +1,108 @@
+<main class="page-content">
+    <h2>舌尖上的成都</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 40px;">麻辣鲜香，回味无穷。成都美食等您来品鉴。</p>
+
+    <!-- 美食图片展示区（横向滚轮） -->
+    <div class="food-gallery">
+
+        <!-- ===== 第一张卡片 ===== -->
+        <div class="food-card">
+            <img src="1_2.jpg" alt="火锅">
+            <h3>火锅</h3>
+            <p>麻辣鲜香，成都必吃。</p>
+        </div>
+
+        <!-- ===== 第二张卡片 ===== -->
+        <div class="food-card">
+            <img src="3.jpg" alt="火锅红油">
+            <h3>火锅红油</h3>
+            <p>红油翻滚，香气扑鼻。</p>
+        </div>
+
+        <!-- ===== 第三张卡片 ===== -->
+        <div class="food-card">
+            <img src="2.jpg" alt="钵钵鸡">
+            <h3>钵钵鸡</h3>
+            <p>冷串串香，清爽麻辣。</p>
+        </div>
+
+        <!-- ===== 第四张卡片 ===== -->
+        <div class="food-card">
+            <img src="4.jpg" alt="烤兔腿">
+            <h3>烤兔腿</h3>
+            <p>外焦里嫩，香辣入味。</p>
+        </div>
+
+        <!-- 需要更多卡片，直接复制上面整块 <div class="food-card">...</div> 粘贴即可 -->
+
+    </div>
+
+    <style>
+        /* 页面主体内容区 */
+        .page-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        .page-content h2 {
+            text-align: center;
+            color: #c0392b;
+            margin-top: 30px;
+        }
+
+        /* 横向滚动容器 */
+        .food-gallery {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;          /* 横向滚动 */
+            padding: 10px 4px 20px;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;     /* 细滚动条 */
+        }
+
+        /* 每张卡片固定宽度，不压缩 */
+        .food-card {
+            flex: 0 0 240px;           /* 卡片宽度 240px，可自行改小 */
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform .2s;
+        }
+        .food-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 关键：图片统一比例，解决"太大"问题 */
+        .food-card img {
+            width: 100%;
+            aspect-ratio: 4 / 3;       /* 固定 4:3 比例 */
+            object-fit: cover;         /* 裁剪填充，不变形 */
+            display: block;
+        }
+
+        .food-card h3 {
+            margin: 12px 16px 6px;
+            font-size: 17px;
+            color: #333;
+        }
+        .food-card p {
+            margin: 0 16px 16px;
+            font-size: 14px;
+            color: #777;
+            line-height: 1.5;
+        }
+    </style>
+
+    <script>
+        /* 鼠标滚轮控制横向滚动 */
+        const gallery = document.querySelector('.food-gallery');
+        gallery.addEventListener('wheel', (e) => {
+            if (gallery.scrollWidth > gallery.clientWidth) {
+                e.preventDefault();
+                gallery.scrollLeft += e.deltaY;
+            }
+        }, { passive: false });
+    </script>
+</main>
