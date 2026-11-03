@@ -1,0 +1,233 @@
+/* ==========================================================
+   home.css —— 首页专属样式
+   包含：全屏轮播 banner、宣传视频、城市简介
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   1. 全屏轮播 banner
+   高度扣掉页头，保证首屏正好铺满一屏
+   ---------------------------------------------------------- */
+.banner {
+  position: relative;
+  height: calc(100vh - var(--header-h));
+  min-height: 520px;
+  overflow: hidden;
+  background: #1A150F;
+}
+
+/* 幻灯片堆叠：默认透明，激活时淡入
+   时序安排：上一张先快速淡出（.35s），下一张延迟 .3s 再淡入，
+   避免两张的文字在同一位置重叠。 */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.04);
+  transition: opacity .35s var(--ease),
+              transform 1.4s var(--ease),
+              visibility 0s linear .35s;
+}
+
+.slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: opacity .8s var(--ease) .3s,
+              transform 1.4s var(--ease),
+              visibility 0s linear 0s;
+}
+
+/* 三张轮播图：实拍照片铺满，换图只需替换 assets/img/banner-N.jpg */
+.slide-1 { background-image: url("../assets/img/banner-1.jpg"); }
+.slide-2 { background-image: url("../assets/img/banner-2.jpg"); }
+.slide-3 { background-image: url("../assets/img/banner-3.jpg"); }
+
+/* 统一压暗遮罩：左侧最重保证文字清晰，底部再压一层，
+   无论换成什么照片都能维持可读性 */
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg,
+      rgba(12, 9, 5, .93) 0%,
+      rgba(16, 12, 7, .78) 38%,
+      rgba(16, 12, 7, .34) 68%,
+      rgba(10, 8, 5, .55) 100%),
+    radial-gradient(130% 90% at 50% 115%, rgba(0, 0, 0, .55), transparent 62%);
+  pointer-events: none;
+}
+
+/* 水印大字：一个"蜀"字压在右下角，透明度很低，只作为氛围点缀 */
+.slide::after {
+  content: "蜀";
+  position: absolute;
+  right: 4vw;
+  bottom: -6vw;
+  font-family: "Songti SC", "SimSun", serif;
+  font-size: min(46vw, 460px);
+  line-height: 1;
+  color: rgba(255, 255, 255, .1);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* 幻灯片文字区 */
+.slide-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;   /* 留足宽度，保证标题第二行不被拆成孤字 */
+  color: #FBF6E9;
+  text-shadow: 0 1px 18px rgba(0, 0, 0, .55);
+}
+
+.slide-kicker {
+  display: inline-block;
+  margin-bottom: 18px;
+  padding: 4px 14px;
+  border: 1px solid rgba(230, 200, 106, .55);
+  border-radius: 999px;
+  font-size: .72rem;
+  letter-spacing: .28em;
+  color: var(--gold-light);
+}
+
+.slide-content h2 {
+  font-family: "Songti SC", "SimSun", serif;
+  font-size: clamp(2rem, 4.6vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.28;
+  letter-spacing: .1em;
+}
+
+.slide-content p {
+  margin-top: 20px;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: rgba(251, 246, 233, .88);
+}
+
+/* 轮播左右箭头 */
+.banner-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(251, 246, 233, .34);
+  border-radius: 50%;
+  background: rgba(20, 16, 10, .18);
+  color: #FBF6E9;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background-color .3s var(--ease), border-color .3s var(--ease);
+}
+
+.banner-arrow:hover {
+  background: rgba(201, 162, 39, .82);
+  border-color: transparent;
+  color: #2A2109;
+}
+
+.banner-prev { left: 24px; }
+.banner-next { right: 24px; }
+
+/* 轮播指示点 */
+.banner-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 34px;
+  z-index: 5;
+  display: flex;
+  gap: 10px;
+  transform: translateX(-50%);
+}
+
+.banner-dots button {
+  width: 34px;
+  height: 3px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: rgba(251, 246, 233, .32);
+  cursor: pointer;
+  transition: background-color .3s var(--ease), width .3s var(--ease);
+}
+
+.banner-dots button.is-active {
+  width: 52px;
+  background: var(--gold-light);
+}
+
+/* ----------------------------------------------------------
+   2. 宣传视频
+   ---------------------------------------------------------- */
+.video-section { padding-block: 92px 0; }
+
+.video-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #12100C;
+  box-shadow: var(--shadow-md);
+}
+
+/* 16:9 自适应，视频本身不再撑高容器 */
+.promo-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #12100C;
+}
+
+/* ----------------------------------------------------------
+   3. 城市简介
+   ---------------------------------------------------------- */
+.intro-section { padding-block: 96px 0; }
+
+.intro-text {
+  max-width: 46em;
+  margin-inline: auto;
+  padding: 40px 44px;
+  border-left: 2px solid var(--gold);
+  background: #FFFDF9;
+  box-shadow: var(--shadow-sm);
+  font-size: 1.02rem;
+  line-height: 2.15;
+  letter-spacing: .02em;
+  color: var(--ink-soft);
+  text-indent: 2em;
+}
+
+/* ----------------------------------------------------------
+   4. 响应式
+   ---------------------------------------------------------- */
+@media (max-width: 720px) {
+  .banner { min-height: 460px; }
+  .banner-arrow { display: none; }
+  .slide-content p { font-size: .92rem; }
+  .banner-dots { bottom: 24px; }
+  .intro-text { padding: 28px 24px; font-size: .95rem; }
+}
+
+/* 手机屏幕页头变成两行、高度不再固定，轮播改用视口百分比高度 */
+@media (max-width: 640px) {
+  .banner {
+    height: 74vh;
+    min-height: 420px;
+  }
+
+  .slide-content h2 { font-size: clamp(1.7rem, 8vw, 2.4rem); }
+  .slide::after { font-size: 62vw; bottom: -4vw; }
+}

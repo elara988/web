@@ -1,0 +1,190 @@
+/* ==========================================================
+   travel.css —— 攻略页专属样式
+   核心内容：交通方式对比表格 + 行程建议
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   1. 交通方式对比表格
+   ---------------------------------------------------------- */
+.table-section { padding-block: 88px 0; }
+
+/* 表格外框：细金边 + 轻投影，保持简约 */
+.table-wrap {
+  overflow-x: auto;              /* 窄屏可横向滚动，不挤压列宽 */
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #FFFDF9;
+  box-shadow: var(--shadow-sm);
+}
+
+.fare-table {
+  width: 100%;
+  min-width: 540px;
+  border-collapse: collapse;
+  font-size: .95rem;
+}
+
+/* 表格标题：位于表格上方，使用题注语义 */
+.fare-table caption {
+  padding: 22px 24px 18px;
+  font-family: "Songti SC", "SimSun", serif;
+  font-size: 1.06rem;
+  letter-spacing: .1em;
+  text-align: left;
+  color: var(--ink);
+}
+
+/* 表头：深墨底 + 金字，突出三列字段 */
+.fare-table thead th {
+  padding: 14px 24px;
+  background: #241D13;
+  font-size: .86rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-align: left;
+  color: var(--gold-light);
+}
+
+.fare-table thead th:first-child { border-top-left-radius: 4px; }
+.fare-table thead th:last-child { border-top-right-radius: 4px; }
+
+/* 表体单元格 */
+.fare-table tbody th,
+.fare-table tbody td {
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(201, 162, 39, .16);
+  text-align: left;
+  font-weight: 400;
+}
+
+/* 行首的交通方式作为行标题，稍作强调 */
+.fare-table tbody th {
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.fare-table tbody td { color: var(--ink-soft); }
+
+/* 斑马纹 + 悬停高亮 */
+.fare-table tbody tr:nth-child(even) { background: rgba(244, 238, 227, .55); }
+
+.fare-table tbody tr:hover { background: rgba(230, 200, 106, .18); }
+
+.fare-table tbody tr:last-child th,
+.fare-table tbody tr:last-child td { border-bottom: 0; }
+
+/* 表格脚注 */
+.table-note {
+  margin-top: 14px;
+  font-size: .8rem;
+  color: var(--ink-mute);
+}
+
+/* ----------------------------------------------------------
+   2. 行程建议：按天排列的编号列表
+   ---------------------------------------------------------- */
+.itinerary-section { padding-block: 88px 0; }
+
+.itinerary {
+  display: grid;
+  gap: 20px;
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+.itinerary-item {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 24px;
+  padding: 26px 28px;
+  background: #FFFDF9;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  transition: box-shadow .35s var(--ease), transform .35s var(--ease);
+}
+
+.itinerary-item:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.itinerary-day {
+  font-family: "Songti SC", "SimSun", serif;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: var(--gold-deep);
+}
+
+.itinerary-day small {
+  display: block;
+  margin-top: 4px;
+  font-family: inherit;
+  font-size: .72rem;
+  letter-spacing: .14em;
+  color: var(--ink-mute);
+}
+
+.itinerary-item h3 {
+  margin-bottom: 8px;
+  font-size: 1.02rem;
+  letter-spacing: .06em;
+}
+
+.itinerary-item p {
+  font-size: .9rem;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+/* ----------------------------------------------------------
+   3. 出行小贴士
+   ---------------------------------------------------------- */
+.tips-section { padding-block: 88px 0; }
+
+.tips-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.tips-list li {
+  padding: 22px 24px;
+  background: var(--paper-2);
+  border-radius: 4px;
+  font-size: .9rem;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+.tips-list strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: .95rem;
+  color: var(--ink);
+}
+
+/* 手机屏幕：收紧单元格留白，让三列在屏内一次看完，不必横向滚动 */
+@media (max-width: 560px) {
+  .fare-table { min-width: 0; }
+
+  .fare-table caption { padding: 16px 16px 12px; font-size: .98rem; }
+
+  .fare-table thead th { padding: 12px 12px; letter-spacing: .06em; }
+
+  .fare-table tbody th,
+  .fare-table tbody td { padding: 13px 12px; font-size: .88rem; }
+}
+
+@media (max-width: 720px) {
+  .table-section,
+  .itinerary-section,
+  .tips-section { padding-block: 60px 0; }
+
+  .itinerary-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 22px;
+  }
+}

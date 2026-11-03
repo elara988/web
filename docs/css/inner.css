@@ -1,0 +1,40 @@
+/* ==========================================================
+   inner.css —— 内容页共用样式
+   适用：food.html / sights.html / culture.html
+   说明：卡片网格已由 common.css 提供，此处补充页面级排版
+   ========================================================== */
+
+/* 内容区块之间保持统一的纵向节奏 */
+.content-block { padding-block: 84px 0; }
+
+/* 首个内容区块紧接 page-hero，适当留白 */
+.page-hero + .content-block { padding-top: 88px; }
+
+/* 卡片正文下方的金色小尾巴，用于收束视觉 */
+.card::after {
+  content: "";
+  position: absolute;
+  left: 28px;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-light), var(--gold));
+  transition: width .45s var(--ease);
+}
+
+.card:hover::after { width: 56px; }
+
+/* 页面底部一句话提示，与正文区分 */
+.page-note {
+  max-width: 58ch;
+  margin: 56px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: .86rem;
+  text-align: center;
+  color: var(--ink-mute);
+}
+
+@media (max-width: 720px) {
+  .content-block { padding-block: 60px 0; }
+}

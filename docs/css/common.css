@@ -1,0 +1,464 @@
+/* ==========================================================
+   common.css —— 蜀韵·成都 全站公共样式
+   作用：设计变量、基础重置、页头、页尾、通用组件
+   约定：结构与样式分离，HTML 中不写行内样式
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   1. 设计变量：主题色为金色，深中浅三级 + 墨色文字
+   ---------------------------------------------------------- */
+:root {
+  --gold:       #C9A227;   /* 主金色：导航高亮、强调线 */
+  --gold-light: #E6C86A;   /* 浅金：渐变高光 */
+  --gold-deep:  #96751A;   /* 深金：悬停加深 */
+  --ink:        #1F1B15;   /* 墨色：标题与正文主色 */
+  --ink-soft:   #5C554A;   /* 次级文字 */
+  --ink-mute:   #8B8375;   /* 辅助说明文字 */
+  --paper:      #FBF8F2;   /* 米白底 */
+  --paper-2:    #F4EEE3;   /* 浅米底：卡片、悬停 */
+  --line:       rgba(201, 162, 39, .26);  /* 分割线 */
+  --shadow-sm:  0 2px 10px rgba(31, 27, 21, .06);
+  --shadow-md:  0 12px 34px rgba(31, 27, 21, .10);
+  --header-h:   76px;      /* 页头高度，轮播区据此扣减 */
+  --max-w:      1180px;    /* 页面最大内容宽度 */
+  --ease:       cubic-bezier(.22, .61, .36, 1);
+}
+
+/* ----------------------------------------------------------
+   2. 基础重置与排版
+   ---------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 12px); /* 锚点跳转时避开吸顶页头 */
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB",
+               "Source Han Sans SC", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+video,
+svg { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+ul,
+ol { margin: 0; padding: 0; list-style: none; }
+
+h1, h2, h3, h4, p { margin: 0; }
+
+/* 容器：统一左右留白与最大宽度 */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* ----------------------------------------------------------
+   3. 页头（五个页面完全一致）
+   ---------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: rgba(251, 248, 242, .88);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 100%;
+}
+
+/* --- 3.1 左侧：Logo + 站点标题 --- */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  color: var(--gold);
+  transition: transform .55s var(--ease);
+}
+
+.brand:hover .brand-mark { transform: rotate(-8deg); }
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.18;
+}
+
+.brand-text strong {
+  font-family: "Songti SC", "SimSun", "STSong", serif;
+  font-size: 1.34rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.brand-text em {
+  font-style: normal;
+  font-size: .58rem;
+  letter-spacing: .2em;
+  color: var(--ink-mute);
+}
+
+/* --- 3.2 右侧：主导航 --- */
+.site-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.site-nav a {
+  position: relative;
+  display: block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: .95rem;
+  letter-spacing: .08em;
+  white-space: nowrap;          /* 导航项不换行，避免窄屏被拆成两行 */
+  color: var(--ink-soft);
+  transition: color .25s var(--ease), background-color .25s var(--ease);
+}
+
+.site-nav a:hover {
+  color: var(--ink);
+  background: var(--paper-2);
+}
+
+/* 当前页高亮：首页及各子页在此类上加 is-active */
+.site-nav a.is-active {
+  color: #3A2C05;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  box-shadow: 0 6px 16px rgba(201, 162, 39, .3);
+}
+
+/* ----------------------------------------------------------
+   4. 页尾（五个页面完全一致）
+   ---------------------------------------------------------- */
+.site-footer {
+  margin-top: 108px;
+  background: #1F1B15;
+  color: #E7E0D2;
+}
+
+/* 顶部金色渐变线，呼应主题色 */
+.site-footer::before {
+  content: "";
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.2fr;
+  gap: 48px;
+  padding-block: 56px 36px;
+}
+
+.footer-brand strong {
+  display: block;
+  margin-bottom: 12px;
+  font-family: "Songti SC", "SimSun", serif;
+  font-size: 1.2rem;
+  letter-spacing: .14em;
+  color: var(--gold-light);
+}
+
+.footer-brand p {
+  max-width: 34ch;
+  font-size: .88rem;
+  line-height: 1.9;
+  color: rgba(231, 224, 210, .62);
+}
+
+.footer-title {
+  margin-bottom: 14px;
+  font-size: .82rem;
+  letter-spacing: .18em;
+  color: rgba(231, 224, 210, .5);
+}
+
+.footer-nav li + li { margin-top: 8px; }
+
+.footer-nav a {
+  font-size: .9rem;
+  color: rgba(231, 224, 210, .82);
+  transition: color .25s var(--ease), padding-left .25s var(--ease);
+}
+
+.footer-nav a:hover {
+  color: var(--gold-light);
+  padding-left: 4px;
+}
+
+.footer-meta li {
+  font-size: .88rem;
+  line-height: 2;
+  color: rgba(231, 224, 210, .62);
+}
+
+.footer-bottom {
+  padding-block: 18px;
+  border-top: 1px solid rgba(231, 224, 210, .12);
+  font-size: .78rem;
+  letter-spacing: .06em;
+  text-align: center;
+  color: rgba(231, 224, 210, .45);
+}
+
+.footer-bottom a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color .25s var(--ease);
+}
+
+.footer-bottom a:hover { color: var(--gold-light); }
+
+/* ----------------------------------------------------------
+   5. 通用组件：区块标题
+   ---------------------------------------------------------- */
+.section { padding-block: 88px 0; }
+
+.section-head {
+  margin-bottom: 44px;
+  text-align: center;
+}
+
+/* 小标签：区块上方的金色英文小字 */
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: .72rem;
+  letter-spacing: .3em;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-family: "Songti SC", "SimSun", serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 2px;
+  margin: 18px auto 0;
+  background: linear-gradient(90deg, var(--gold-light), var(--gold));
+}
+
+.section-desc {
+  max-width: 56ch;
+  margin: 16px auto 0;
+  font-size: .95rem;
+  color: var(--ink-soft);
+}
+
+/* ----------------------------------------------------------
+   6. 通用组件：子页面顶部小横幅
+   ---------------------------------------------------------- */
+.page-hero {
+  display: flex;
+  align-items: center;
+  min-height: 300px;
+  padding-block: 72px;
+  background:
+    radial-gradient(120% 140% at 82% 12%, rgba(201, 162, 39, .34), transparent 58%),
+    linear-gradient(135deg, #221C14 0%, #3A2F1C 52%, #6B5418 100%);
+  color: #F6F1E4;
+}
+
+.page-hero h1 {
+  font-family: "Songti SC", "SimSun", serif;
+  font-size: clamp(2rem, 4.4vw, 3rem);
+  letter-spacing: .16em;
+}
+
+.page-hero p {
+  max-width: 52ch;
+  margin-top: 16px;
+  font-size: .95rem;
+  color: rgba(246, 241, 228, .7);
+}
+
+/* ----------------------------------------------------------
+   7. 通用组件：卡片网格
+   ---------------------------------------------------------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;              /* 图片放大时裁剪在卡片内 */
+  background: #FFFDF9;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease),
+              border-color .4s var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: var(--shadow-md);
+}
+
+/* 卡片配图：统一比例裁切，悬停轻微放大 */
+.card-media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--paper-2);
+  transition: transform .7s var(--ease);
+}
+
+.card:hover .card-media { transform: scale(1.05); }
+
+/* 卡片文字区 */
+.card-body { padding: 26px 28px 32px; }
+
+/* 卡片序号：金色数字，替代图标，保持简约 */
+.card-index {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--gold);
+  opacity: .75;
+}
+
+.card h3 {
+  margin: 14px 0 10px;
+  font-family: "Songti SC", "SimSun", serif;
+  font-size: 1.18rem;
+  letter-spacing: .08em;
+}
+
+.card p {
+  font-size: .9rem;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+/* ----------------------------------------------------------
+   8. 图片来源页：缩略图 + 署名信息
+   ---------------------------------------------------------- */
+.credits-list {
+  display: grid;
+  gap: 12px;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.credits-item {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: 14px 18px;
+  background: #FFFDF9;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.credits-item img {
+  width: 132px;
+  height: 88px;
+  object-fit: cover;
+  border-radius: 3px;
+  background: var(--paper-2);
+}
+
+.credits-item h3 {
+  margin-bottom: 4px;
+  font-size: .95rem;
+  letter-spacing: .04em;
+}
+
+.credits-item p {
+  font-size: .8rem;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  word-break: break-all;
+}
+
+.credits-item a {
+  color: var(--gold-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ----------------------------------------------------------
+   9. 响应式：窄屏收敛间距与字号
+   ---------------------------------------------------------- */
+@media (max-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 720px) {
+  :root { --header-h: 64px; }
+
+  .brand-text em { display: none; }
+  .brand-text strong { font-size: 1.1rem; letter-spacing: .08em; }
+  .site-nav a { padding: 6px 10px; font-size: .85rem; letter-spacing: 0; }
+
+  .section { padding-block: 64px 0; }
+  .page-hero { min-height: 240px; padding-block: 56px; }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    padding-block: 44px 28px;
+  }
+}
+
+/* 手机屏幕：页头改为上下两行，标题居中、导航居中，避免挤压变形 */
+@media (max-width: 640px) {
+  .site-header { height: auto; }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding-block: 10px 8px;
+  }
+
+  .brand { justify-content: center; }
+  .brand-text strong { font-size: 1.05rem; }
+  .brand-mark svg { width: 34px; height: 34px; }
+
+  .site-nav ul { justify-content: center; }
+  .site-nav a { padding: 5px 9px; font-size: .82rem; }
+}

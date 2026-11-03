@@ -1,63 +1,172 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>个人名片</title>
-    <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-body{
-    background:#f2f2f2;
-    font-family:"Microsoft Yahei",sans-serif;
-    display:flex;
-    min-height:100vh;
-    justify-content:center;
-    align-items:center;
-}
-.card{
-    width:340px;
-    background:#ffffff;
-    border-radius:16px;
-    padding:32px;
-    text-align:center;
-    box-shadow:0 4px 16px rgba(0,0,0,0.08);
-}
-.avatar{
-    width:110px;
-    height:110px;
-    border-radius:50%;
-    object-fit:cover;
-    margin-bottom:18px;
-}
-.name{
-    font-size:24px;
-    font-weight:bold;
-    color:#222222;
-    margin-bottom:8px;
-}
-.job{
-    color:#666666;
-    font-size:16px;
-    margin-bottom:20px;
-}
-.info{
-    line-height:2;
-    color:#444444;
-}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>蜀韵·成都 | 成都文化旅游宣传</title>
+  <meta name="description" content="蜀韵·成都，成都文化旅游宣传站。美食、景点、文化、攻略，一站了解天府之国。">
+  <!-- 结构（HTML）与样式（CSS）分离，公共样式与首页样式分文件引入 -->
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-<div class="card">
-    <img class="avatar" src="https://picsum.photos/id/1005/110/110">
-    <div class="name">周文秀</div>
-    <div class="job">前端开发工程师</div>
-    <div class="info">
-        📞 电话：186‑8136‑3608<br>
-        ✉️ 邮箱：2246994840@qq.com
+
+  <!-- ========== 页头：五个页面完全一致 ========== -->
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <!-- 左侧：Logo + 站点标题 -->
+      <a class="brand" href="index.html" aria-label="蜀韵·成都 首页">
+        <span class="brand-mark">
+          <svg width="42" height="42" viewBox="0 0 48 48" role="img" aria-label="蜀韵·成都 标志">
+            <circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="24" cy="24" r="16.5" fill="none" stroke="currentColor" stroke-width=".7" stroke-dasharray="2 3" opacity=".7"/>
+            <text x="24" y="31.5" text-anchor="middle" font-size="19"
+                  font-family="Songti SC, SimSun, serif" fill="currentColor">蜀</text>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>蜀韵·成都</strong>
+          <em>CHENGDU CULTURE &amp; TRAVEL</em>
+        </span>
+      </a>
+
+      <!-- 右侧：主导航，当前页（首页）高亮 -->
+      <nav class="site-nav" aria-label="主导航">
+        <ul>
+          <li><a href="index.html" class="is-active">首页</a></li>
+          <li><a href="food.html">美食</a></li>
+          <li><a href="sights.html">景点</a></li>
+          <li><a href="culture.html">文化</a></li>
+          <li><a href="travel.html">攻略</a></li>
+        </ul>
+      </nav>
+
     </div>
-</div>
+  </header>
+
+  <!-- ========== 全屏轮播 banner：三张轮播图 ========== -->
+  <section class="banner" aria-label="成都印象轮播图"
+           aria-roledescription="carousel">
+
+    <!-- 第 1 张：宽窄巷子 -->
+    <article class="slide slide-1 is-active" role="group" aria-label="1 / 3 宽窄巷子">
+      <div class="container slide-content">
+        <span class="slide-kicker">一 巷 三 百 年</span>
+        <h2>宽窄巷子<br>青砖灰瓦里的慢时光</h2>
+        <p>三条清代街巷并排而行，宽巷子的院、窄巷子的墙、井巷子的砖，把老成都的市井气息留到了今天。</p>
+      </div>
+    </article>
+
+    <!-- 第 2 张：大熊猫基地 -->
+    <article class="slide slide-2" role="group" aria-label="2 / 3 大熊猫基地">
+      <div class="container slide-content">
+        <span class="slide-kicker">国 宝 之 乡</span>
+        <h2>大熊猫繁育研究基地<br>把慵懒过成一种天赋</h2>
+        <p>清晨的竹林里，熊猫抱着竹子慢慢啃，阳光漏下来，整座城市的节奏也跟着慢了一拍。</p>
+      </div>
+    </article>
+
+    <!-- 第 3 张：锦江夜色 -->
+    <article class="slide slide-3" role="group" aria-label="3 / 3 锦江夜色">
+      <div class="container slide-content">
+        <span class="slide-kicker">夜 游 锦 江</span>
+        <h2>锦江夜色<br>灯火里的天府人间</h2>
+        <p>船过九眼桥，两岸灯火顺着水面铺开，火锅的红油与街头的人声一起，把夜晚烧得滚烫。</p>
+      </div>
+    </article>
+
+    <!-- 左右切换箭头 -->
+    <button class="banner-arrow banner-prev" type="button" aria-label="上一张">&#10094;</button>
+    <button class="banner-arrow banner-next" type="button" aria-label="下一张">&#10095;</button>
+
+    <!-- 指示点 -->
+    <div class="banner-dots" role="tablist" aria-label="轮播图切换">
+      <button type="button" class="is-active" aria-label="第 1 张"></button>
+      <button type="button" aria-label="第 2 张"></button>
+      <button type="button" aria-label="第 3 张"></button>
+    </div>
+
+  </section>
+
+  <main>
+
+    <!-- ========== 成都宣传视频 ========== -->
+    <section class="video-section" id="video">
+      <div class="container">
+        <header class="section-head">
+          <span class="eyebrow">City Film</span>
+          <h2 class="section-title">成都宣传片</h2>
+          <p class="section-desc">两分钟，看一眼这座把日子过成诗的城市。</p>
+        </header>
+
+        <div class="video-frame">
+          <!-- 宣传片：assets/chengdu.mp4（1280×720，1 分 58 秒）。
+               想换成自己的片子，替换同名文件即可。 -->
+          <video class="promo-video" controls preload="metadata"
+                 poster="assets/poster.jpg" playsinline>
+            <source src="assets/chengdu.mp4" type="video/mp4">
+            您的浏览器不支持 HTML5 视频，请
+            <a href="assets/chengdu.mp4">下载观看宣传片</a>。
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 城市简介 ========== -->
+    <section class="intro-section" id="intro">
+      <div class="container">
+        <header class="section-head">
+          <span class="eyebrow">About Chengdu</span>
+          <h2 class="section-title">一座来了就不想走的城</h2>
+        </header>
+
+        <p class="intro-text">
+          成都是泡在茶汤里的一座城。清晨的巷子腾着豆浆的热气，午后茶馆的竹椅吱呀作响，夜里火锅翻滚着红油与人声。三千年城址不迁，两千载锦水长流，这里有熊猫的慵懒、川剧的惊艳、蜀绣的细密，也有市井街头的从容。来成都，把脚步放慢一点，把日子过软一点。
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== 页尾：五个页面完全一致 ========== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <strong>蜀韵·成都</strong>
+        <p>以金色为引，串起成都的味、景、文与行。愿你在天府之国，找到属于自己的慢时光。</p>
+      </div>
+
+      <div>
+        <p class="footer-title">站 内 导 航</p>
+        <ul class="footer-nav">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="food.html">美食</a></li>
+          <li><a href="sights.html">景点</a></li>
+          <li><a href="culture.html">文化</a></li>
+          <li><a href="travel.html">攻略</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-title">城 市 名 片</p>
+        <ul class="footer-meta">
+          <li>别称：蓉城 · 锦官城 · 天府之国</li>
+          <li>坐标：四川盆地西部，成都平原腹地</li>
+          <li>气质：慢生活、烟火气、包容</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 蜀韵·成都 · 成都文化旅游宣传站 · 本站为学习演示用途
+      · <a href="credits.html">图片与视频来源</a>
+    </div>
+  </footer>
+
+  <!-- 轮播等交互脚本 -->
+  <script src="js/main.js"></script>
 </body>
 </html>
